@@ -1,0 +1,39 @@
+# Program that determines all the elements in a list that are inferior to a certain value.
+
+import random
+
+while True:
+    question = input("You must chose a number between 1 and 20: ") # The range of the number chosen is arbitrary.
+    try:
+        question = int(question)        # the variable question was, before that, a 'str'. However, the user enters a number.
+        assert 21 > question > 0        # Considering the number is an integer, ' 0.5, 0.65, ...0.999 ' can't be chosen. the same thing goes for  ]20,21[
+                                             # the conditions after 'assert' must be respected
+    except ValueError:  # the type of value is not right.            
+        print("You did not chose an integer.")
+    except AssertionError:                 # he chose an integer but it is not in the range...
+        print("The integer must be in that range [1,20]")
+    else:            # the input is correct, so this this bloc of code can be executed.
+        break           # we don't want our program to keep asking to chose a number. After all, we only wanted to store a number in a variable.
+                                      # The loop is broken !
+    
+    
+
+r = random.randint(10,20)                                # a random integer 
+
+empty = list()                                # An empty list
+generated_list = random.sample(range(1,30) ,r)                           # It will generates a random list that contains 'r' elements from 1 to 30 (without repetition)
+print(sorted(generated_list))                                                                               # To verify if the program does work....
+
+
+
+for element in generated_list: 
+    if element < question:                                                          # The loop will look at each number and determinates if the condition is respected.
+        empty.append(element)                           # The elements that are < to the number chose by the user ( variable 'question') will be stored in an a list.
+
+
+print(" ")
+if len(empty) > 0:                                                                                           # there is at least 1 element in the list 'empty'.
+    print(sorted(empty))
+    print("Here is a list that contains the elements that are inferior to", question, " in the previous list.")
+else:                                                                                                        # len(empty) <= 0
+    print("In the list above, all the elements are superior to", question, ".")
